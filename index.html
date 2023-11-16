@@ -1,9 +1,46 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="./main.css" />
     <title>Jafet Sinke — Portfolio</title>
   </head>
   <body>
-    <h1>Hello World</h1>
+    <h1 class="center-y">Jafet Sinke</h1>
+    <div class="code-bg">
+      <p id="text">
+        <div id="mousefollow"></div>
+      </p>
+    </div>
+    <script>
+      const possibleChars =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{};:,./?`~";
+      const text = document.getElementById("text");
+      const mousefollow = document.getElementById("mousefollow");
+      const windowHeight = window.innerHeight;
+      const windowWidth = window.innerWidth;
+
+      // execute on body load
+      (function () {
+        text.innerHTML = generateRandomString(possibleChars, 8000);
+        setInterval(() => {
+          text.innerHTML = generateRandomString(possibleChars, 8000);
+        }, 100);
+      })();
+      
+      document.addEventListener("mousemove", (e) => {
+        setTimeout(() => {
+          mousefollow.style.left = e.pageX + "px";
+          mousefollow.style.top = e.pageY + "px";
+        }, 100);
+      });
+
+      function generateRandomString(chars, length) {
+        let result = "";
+        for (let i = 0; i < length; i++) {
+          result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+      }
+    </script>
   </body>
 </html>
